@@ -23,7 +23,7 @@
     "name": "Elevia Stays",
     "url": "https://eleviaenterprises.com/elevia-stays.html",
     "description": "Developing premium furnished housing for insurance relocation, corporate stays, and individuals in transition.",
-    "email": "info@eleviaenterprises.com",
+    "email": "hello@eleviastays.com",
     "parentOrganization": {"@type": "Organization", "name": "Elevia Enterprises", "url": "https://eleviaenterprises.com"},
     "areaServed": ["Atlanta, GA", "Orlando, FL", "Tampa, FL", "Dallas, TX", "Phoenix, AZ"]
   }
@@ -388,7 +388,7 @@
         </div>
         <div style="margin-top:1.5rem;">
           <button type="submit" class="btn-gold">Send Message</button>
-          <p class="form-note">All inquiries are routed to info@eleviaenterprises.com and responded to within 1&ndash;2 business days.</p>
+          <p class="form-note">All inquiries are routed to hello@eleviastays.com and responded to within 1&ndash;2 business days.</p>
         </div>
       </form>
       <div class="form-success" id="formSuccess">
@@ -396,7 +396,7 @@
         <p>We&rsquo;ll be in touch within 1&ndash;2 business days.</p>
       </div>
       <div class="form-error" id="formError">
-        <p>Something went wrong submitting the form. Please email us directly at <a href="mailto:info@eleviaenterprises.com" style="color:var(--gold);">info@eleviaenterprises.com</a>.</p>
+        <p>Something went wrong submitting the form. Please email us directly at <a href="mailto:hello@eleviastays.com" style="color:var(--gold);">hello@eleviastays.com</a>.</p>
       </div>
     </div>
   </section>
@@ -445,7 +445,7 @@
         // Fallback: open mail client with pre-filled message
         const subject = encodeURIComponent('Elevia Stays Inquiry — ' + d.get('role') + ' — ' + d.get('name'));
         const body = encodeURIComponent('Name: ' + d.get('name') + '\nCompany: ' + (d.get('company')||'N/A') + '\nEmail: ' + d.get('email') + '\nPhone: ' + (d.get('phone')||'N/A') + '\nRole: ' + d.get('role') + '\nMarket: ' + (d.get('market')||'N/A') + '\n\nMessage:\n' + d.get('message'));
-        window.location.href = 'mailto:info@eleviaenterprises.com?subject=' + subject + '&body=' + body;
+        window.location.href = 'mailto:hello@eleviastays.com?subject=' + subject + '&body=' + body;
         document.getElementById('formError').style.display = 'block';
       });
     }
