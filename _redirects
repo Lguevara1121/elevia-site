@@ -1,3 +1,3 @@
-# Serve the Elevia Stays page when visitors land on eleviastays.com
-https://eleviastays.com/*      /elevia-stays.html   200
-https://www.eleviastays.com/*  /elevia-stays.html   200
+# Old elevia-stays.html page now lives at its own domain — send any
+# visitors who land on the old path to the dedicated Elevia Stays site
+/elevia-stays.html  https://eleviastays.com/  301
