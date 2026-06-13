@@ -1,0 +1,3 @@
+# Serve the Elevia Stays page when visitors land on eleviastays.com
+https://eleviastays.com/*      /elevia-stays.html   200
+https://www.eleviastays.com/*  /elevia-stays.html   200
