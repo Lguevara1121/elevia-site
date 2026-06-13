@@ -1,3 +1,5 @@
 # Old elevia-stays.html page now lives at its own domain — send any
 # visitors who land on the old path to the dedicated Elevia Stays site
-/elevia-stays.html  https://eleviastays.com/  301
+# (the "!" forces this redirect even though elevia-stays.html still
+# exists as a file in this repo)
+/elevia-stays.html  https://eleviastays.com/  301!
