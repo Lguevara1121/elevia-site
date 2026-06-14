@@ -351,7 +351,13 @@
 <script>
   (function(){
     var overlay = document.getElementById('pt-overlay-entry');
-    var fromStays = document.referrer.indexOf('eleviastays.com') !== -1;
+    var params = new URLSearchParams(window.location.search);
+    var fromStays = params.has('es-link');
+    if (fromStays) {
+      params.delete('es-link');
+      var newSearch = params.toString();
+      history.replaceState(null, '', window.location.pathname + (newSearch ? '?' + newSearch : '') + window.location.hash);
+    }
     if (!fromStays) { overlay.classList.add('skip'); }
     else {
       var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -650,9 +656,17 @@
       var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduced) return;
       var overlay = document.getElementById('pt-overlay');
+      function addTransitionParam(url) {
+        var hashIdx = url.indexOf('#');
+        var hash = '';
+        var base = url;
+        if (hashIdx !== -1) { hash = url.slice(hashIdx); base = url.slice(0, hashIdx); }
+        var sep = base.indexOf('?') === -1 ? '?' : '&';
+        return base + sep + 'es-link=1' + hash;
+      }
       function staysTransition(e){
         e.preventDefault();
-        var url = this.href;
+        var url = addTransitionParam(this.href);
         overlay.classList.remove('day','show-icon');
         overlay.classList.add('expand');
         setTimeout(function(){ overlay.classList.add('show-icon'); }, 60);
