@@ -310,8 +310,24 @@
     #faq { padding: 5rem 3rem; background: var(--navy); border-bottom: 1px solid rgba(201,168,76,0.15); }
     .faq-list { display: flex; flex-direction: column; gap: 2rem; max-width: 760px; }
     .faq-item { border-bottom: 1px solid rgba(201,168,76,0.15); padding-bottom: 1.5rem; }
-    .faq-q { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: #F5EFE6; margin-bottom: 0.6rem; }
-    .faq-a { font-size: 15px; line-height: 1.8; color: #B9B2A6; font-weight: 300; }
+    .faq-q {
+      font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: #F5EFE6;
+      margin: 0; width: 100%; background: none; border: none; padding: 0;
+      display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+      text-align: left; cursor: pointer;
+    }
+    .faq-q:hover { color: #C9A84C; }
+    .faq-icon {
+      flex-shrink: 0; width: 28px; height: 28px; border: 1px solid rgba(201,168,76,0.35); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; color: #C9A84C; font-size: 18px; line-height: 1;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(201,168,76,0.12); }
+    .faq-a-wrap { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-a { font-size: 15px; line-height: 1.8; color: #B9B2A6; font-weight: 300; margin: 0; padding-top: 0.9rem; }
+    @media (prefers-reduced-motion: reduce) {
+      .faq-a-wrap, .faq-icon { transition: none; }
+    }
   </style>
 </head>
 <body>
@@ -452,32 +468,67 @@
     <h2 class="section-h2-light">What people ask us.</h2>
     <div class="faq-list">
       <div class="faq-item">
-        <p class="faq-q">What is Elevia Stays?</p>
-        <p class="faq-a">Elevia Stays is a venture of Elevia Enterprises developing premium furnished housing for people in transition &mdash; including insurance relocation housing, corporate housing, and furnished extended-stay rentals.</p>
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-1" id="faq-q-1">
+          <span>What is Elevia Stays?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a-wrap" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
+          <p class="faq-a">Elevia Stays is a venture of Elevia Enterprises developing premium furnished housing for people in transition &mdash; including insurance relocation housing, corporate housing, and furnished extended-stay rentals.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <p class="faq-q">Who does Elevia Stays serve?</p>
-        <p class="faq-a">Elevia Stays serves displaced families navigating insurance claims, corporate travelers and relocating professionals on extended assignments, and individuals between permanent homes.</p>
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-2" id="faq-q-2">
+          <span>Who does Elevia Stays serve?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a-wrap" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
+          <p class="faq-a">Elevia Stays serves displaced families navigating insurance claims, corporate travelers and relocating professionals on extended assignments, and individuals between permanent homes.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <p class="faq-q">What areas does Elevia Stays serve?</p>
-        <p class="faq-a">Elevia Stays is building its property network across Atlanta, Orlando, Tampa, Dallas, and Phoenix &mdash; with a long-term vision of expanding nationwide, and ultimately worldwide, in line with Elevia Enterprises&rsquo; mission to become a global force for opportunity.</p>
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-3" id="faq-q-3">
+          <span>What areas does Elevia Stays serve?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a-wrap" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
+          <p class="faq-a">Elevia Stays is building its property network across Atlanta, Orlando, Tampa, Dallas, and Phoenix &mdash; with a long-term vision of expanding nationwide, and ultimately worldwide, in line with Elevia Enterprises&rsquo; mission to become a global force for opportunity.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <p class="faq-q">How does insurance relocation housing work with Elevia Stays?</p>
-        <p class="faq-a">Elevia Stays works with insurance adjusters and ALE (Additional Living Expense) providers to place displaced policyholders into fully furnished housing, typically for 30&ndash;90+ days, with a fast, seamless placement process.</p>
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-4" id="faq-q-4">
+          <span>How does insurance relocation housing work with Elevia Stays?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a-wrap" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
+          <p class="faq-a">Elevia Stays works with insurance adjusters and ALE (Additional Living Expense) providers to place displaced policyholders into fully furnished housing, typically for 30&ndash;90+ days, with a fast, seamless placement process.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <p class="faq-q">How do I get started with Elevia Stays?</p>
-        <p class="faq-a">Whether you&rsquo;re an insurance professional, a corporate or HR team, a property owner, or navigating a transition yourself, reach out through our contact form and our team will follow up to discuss next steps.</p>
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-5" id="faq-q-5">
+          <span>How do I get started with Elevia Stays?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a-wrap" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
+          <p class="faq-a">Whether you&rsquo;re an insurance professional, a corporate or HR team, a property owner, or navigating a transition yourself, reach out through our contact form and our team will follow up to discuss next steps.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <p class="faq-q">How can property owners partner with Elevia Stays?</p>
-        <p class="faq-a">Property owners can partner with Elevia Stays to generate consistent rental income through professionally managed insurance relocation, corporate housing, and extended-stay placements across our target markets.</p>
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-6" id="faq-q-6">
+          <span>How can property owners partner with Elevia Stays?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a-wrap" id="faq-a-6" role="region" aria-labelledby="faq-q-6">
+          <p class="faq-a">Property owners can partner with Elevia Stays to generate consistent rental income through professionally managed insurance relocation, corporate housing, and extended-stay placements across our target markets.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <p class="faq-q">Why choose furnished housing instead of moving everything at once?</p>
-        <p class="faq-a">Long-distance moves are costly and stressful &mdash; shipping furniture, buying everything new, or living out of boxes while you search for a permanent home. Elevia Stays lets you land in a fully furnished space right away, settle in immediately, and take your time finding the right long-term place, without the pressure or expense of moving everything at once.</p>
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-7" id="faq-q-7">
+          <span>Why choose furnished housing instead of moving everything at once?</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a-wrap" id="faq-a-7" role="region" aria-labelledby="faq-q-7">
+          <p class="faq-a">Long-distance moves are costly and stressful &mdash; shipping furniture, buying everything new, or living out of boxes while you search for a permanent home. Elevia Stays lets you land in a fully furnished space right away, settle in immediately, and take your time finding the right long-term place, without the pressure or expense of moving everything at once.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -640,6 +691,17 @@
         a.addEventListener('click', enterprisesTransition);
       });
     })();
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(function(item){
+      var btn = item.querySelector('.faq-q');
+      var wrap = item.querySelector('.faq-a-wrap');
+      btn.addEventListener('click', function(){
+        var isOpen = item.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        wrap.style.maxHeight = isOpen ? (wrap.scrollHeight + 'px') : '0px';
+      });
+    });
   </script>
 </body>
 </html>
