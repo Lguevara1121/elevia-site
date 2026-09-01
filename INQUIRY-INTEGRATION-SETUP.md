@@ -8,7 +8,6 @@ The Netlify Function at `/api/inquiry-intake` receives signed Netlify form-submi
 - `AZURE_CLIENT_ID`
 - `AZURE_CLIENT_SECRET`
 - `INTAKE_MAILBOX` = `hello@eleviastays.com`
-- `NETLIFY_WEBHOOK_SECRET` = a long random value used in the Netlify webhook's JWS secret field
 - `ALLOWED_UPLOAD_HOSTS` = `.cloudfront.net` (optional; comma-separated)
 
 Set secrets in the Netlify dashboard. Do not commit them.
@@ -23,15 +22,9 @@ Set secrets in the Netlify dashboard. Do not commit them.
 
 For tighter mailbox scoping, use Exchange Online application access controls so the app may send only as `hello@eleviastays.com`.
 
-## Netlify form webhook
+## Netlify form trigger
 
-In the Netlify site that receives the `inquiry` form:
-
-1. Open **Project configuration → Notifications → Emails and webhooks**.
-2. Add an outgoing webhook for verified `inquiry` form submissions.
-3. Set its URL to `https://YOUR-SITE.netlify.app/api/inquiry-intake`.
-4. Set its JWS secret to exactly the value stored as `NETLIFY_WEBHOOK_SECRET`.
-5. After validation, remove the old Netlify email notification to prevent duplicate intake emails.
+The deployed `inquiry-events.mjs` function subscribes directly to Netlify's verified `formSubmitted` platform event. Netlify invokes it internally and verifies the event signature automatically. No outgoing webhook or webhook secret is required.
 
 ## Power Automate handoff
 
