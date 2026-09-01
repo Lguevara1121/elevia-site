@@ -223,6 +223,15 @@ async function sendIntakeEmail(data, attachments) {
   if (!response.ok) throw new Error(`Microsoft sendMail failed (${response.status}).`);
 }
 
+export async function processSubmissionData(data) {
+  if (!data.email || !data.lead_type) throw new Error("Submission is missing required fields");
+
+  const photoUrls = extractPhotoUrls(data);
+  const attachments = await Promise.all(photoUrls.map(downloadPhoto));
+  await sendIntakeEmail(data, attachments);
+  return { photo_count: attachments.length };
+}
+
 export default async function handler(request) {
   if (request.method !== "POST") return json(405, { error: "Method not allowed" });
 
@@ -233,13 +242,8 @@ export default async function handler(request) {
 
   try {
     const payload = JSON.parse(rawBody);
-    const data = submissionData(payload);
-    if (!data.email || !data.lead_type) return json(422, { error: "Submission is missing required fields" });
-
-    const photoUrls = extractPhotoUrls(data);
-    const attachments = await Promise.all(photoUrls.map(downloadPhoto));
-    await sendIntakeEmail(data, attachments);
-    return json(200, { ok: true, photo_count: attachments.length });
+    const result = await processSubmissionData(submissionData(payload));
+    return json(200, { ok: true, ...result });
   } catch (error) {
     console.error("Inquiry intake failed", error);
     return json(500, { error: "Inquiry intake failed" });
