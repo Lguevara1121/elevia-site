@@ -180,7 +180,9 @@
     .form-path-heading { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin: 2rem 0 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(201,168,76,0.15); }
     .form-consent { margin-top: 0.5rem; }
     .consent-label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: rgba(250,247,242,0.55); font-size: 13px; font-weight: 300; line-height: 1.6; }
-    .consent-label input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; accent-color: var(--gold); margin-top: 2px; cursor: pointer; }
+    .consent-label input[type="checkbox"] { appearance: auto; -webkit-appearance: checkbox; width: 20px; height: 20px; flex-shrink: 0; accent-color: var(--gold); margin-top: 1px; cursor: pointer; }
+    .consent-label input[type="checkbox"]:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .email-first-note { margin: 0.25rem 0 0; padding: 0.9rem 1rem; border-left: 2px solid var(--gold); background: rgba(201,168,76,0.07); color: rgba(250,247,242,0.72); font-size: 13px; font-weight: 300; line-height: 1.7; }
     .form-disclaimer { font-size: 11px; color: rgba(250,247,242,0.25); line-height: 1.7; margin-top: 1.25rem; font-style: italic; font-weight: 300; }
     .form-section, .form-path { }
     .form-success p:last-child { font-size: 14px; color: rgba(250,247,242,0.55); font-weight: 300; line-height: 1.8; margin-top: 0.75rem; }
@@ -418,32 +420,15 @@
               <input type="email" id="email" name="email" required placeholder="your@email.com" autocomplete="email">
             </div>
             <div class="form-field">
-              <label for="phone">Phone *</label>
-              <input type="tel" id="phone" name="phone" required placeholder="e.g. +1 800 555 0100" autocomplete="tel">
+              <label for="phone">Phone number (optional)</label>
+              <input type="tel" id="phone" name="phone" placeholder="e.g. +1 800 555 0100" autocomplete="tel">
             </div>
             <div class="form-field">
               <label for="market">Market or location *</label>
               <input type="text" id="market" name="market" required placeholder="e.g. Tampa, FL">
             </div>
-            <div class="form-field">
-              <label for="preferred_contact">Preferred contact method *</label>
-              <select id="preferred_contact" name="preferred_contact" required>
-                <option value="" disabled selected>Select one&hellip;</option>
-                <option value="Email">Email</option>
-                <option value="Phone call">Phone call</option>
-                <option value="Text">Text</option>
-                <option value="Any">Any</option>
-              </select>
-            </div>
-            <div class="form-field">
-              <label for="best_time">Best time to contact *</label>
-              <select id="best_time" name="best_time" required>
-                <option value="" disabled selected>Select one&hellip;</option>
-                <option value="Morning (8am-12pm)">Morning (8am&ndash;12pm)</option>
-                <option value="Afternoon (12pm-5pm)">Afternoon (12pm&ndash;5pm)</option>
-                <option value="Evening (5pm-8pm)">Evening (5pm&ndash;8pm)</option>
-                <option value="Any time">Any time</option>
-              </select>
+            <div class="form-field form-full">
+              <p class="email-first-note">Elevia Stays will respond by email first. If a call would be helpful, we&rsquo;ll arrange one with you by email.</p>
             </div>
           </div>
         </div>
@@ -777,7 +762,7 @@
             <div class="form-field form-full form-consent">
               <label class="consent-label">
                 <input type="checkbox" name="consent" id="consent" required>
-                <span>I consent to be contacted by Elevia Stays regarding my inquiry. *</span>
+                <span>I consent to Elevia Stays using the information provided to respond to my inquiry. *</span>
               </label>
             </div>
           </div>
@@ -795,7 +780,7 @@
 
       <div id="formSuccess" class="form-success" style="display:none;" role="alert" aria-live="polite" tabindex="-1">
         <p>Thank you for contacting Elevia Stays.</p>
-        <p>We&rsquo;ve received your inquiry and appreciate your interest in working with us. A member of our team will review the information you provided and follow up within one business day. If you have additional property details, photos, listings, or other information you&rsquo;d like us to review, you may reply to the confirmation email.</p>
+        <p>We&rsquo;ve received your inquiry and will respond by email within one business day.</p>
       </div>
       <div id="formError" class="form-error" style="display:none;" role="alert" aria-live="assertive" tabindex="-1">
         <p>Something went wrong submitting your inquiry. Your information has been preserved&mdash;please try again, or email us directly at <a href="mailto:hello@eleviastays.com" style="color:var(--gold);">hello@eleviastays.com</a>.</p>
@@ -914,7 +899,7 @@
     // ── BUILD automation_payload ──
     function buildPayload(type, fd, ts) {
       var base = {
-        schema_version:   '1.0',
+        schema_version:   '1.1',
         form_name:        'inquiry',
         lead_type:        type,
         name:             fd.get('name')             || '',
@@ -925,8 +910,6 @@
         property_address: fd.get('property_address') || '',
         availability_date:fd.get('availability_date')|| '',
         message:          fd.get('message')          || '',
-        preferred_contact:fd.get('preferred_contact')|| '',
-        best_time:        fd.get('best_time')        || '',
         consent:          fd.get('consent') === 'on',
         source:           'Website',
         status:           'New',
