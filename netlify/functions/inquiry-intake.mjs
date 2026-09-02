@@ -180,6 +180,7 @@ const OMITTED_FIELDS = new Set([
 ]);
 
 function brandedBody(data, photoCount) {
+  const automationPayload = stringValue(data.automation_payload);
   const rows = Object.entries(data)
     .filter(([key, value]) => !OMITTED_FIELDS.has(key) && !key.startsWith("property_photo_") && stringValue(value))
     .map(([key, value]) => `<tr><td style="padding:8px 12px;border-bottom:1px solid #e8e1d7;color:#6b7280;width:34%;vertical-align:top;">${escapeHtml(humanLabel(key))}</td><td style="padding:8px 12px;border-bottom:1px solid #e8e1d7;color:#1b2b4b;vertical-align:top;">${escapeHtml(stringValue(value))}</td></tr>`)
@@ -193,7 +194,7 @@ function brandedBody(data, photoCount) {
       <tr><td style="padding:10px 28px 28px;"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border:1px solid #e8e1d7;border-bottom:0;">${rows}</table></td></tr>
       <tr><td style="background:#faf7f2;padding:18px 28px;border-top:1px solid #e8e1d7;color:#6b7280;font-size:12px;">Elevia Stays &nbsp;•&nbsp; Built to Inspire.</td></tr>
     </table>
-  </td></tr></table></body></html>`;
+  </td></tr></table>${automationPayload ? `<div aria-hidden="true" style="font-size:1px;line-height:1px;color:#ffffff;max-height:1px;overflow:hidden;">Automation Payload: ${escapeHtml(automationPayload)}</div>` : ""}</body></html>`;
 }
 
 async function sendIntakeEmail(data, attachments) {
