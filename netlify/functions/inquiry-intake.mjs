@@ -192,7 +192,7 @@ function brandedBody(data, photoCount) {
       <tr><td style="background:#1b2b4b;padding:24px 28px;color:#faf7f2;"><div style="font-size:24px;letter-spacing:2px;font-weight:700;">ELEVIA STAYS</div><div style="margin-top:5px;color:#c9a84c;font-size:12px;letter-spacing:1.5px;">NEW INQUIRY</div></td></tr>
       <tr><td style="padding:26px 28px 12px;"><h1 style="margin:0;font-size:22px;font-weight:600;color:#1b2b4b;">${escapeHtml(displayLeadType(data.lead_type))}</h1><p style="margin:8px 0 0;color:#6b7280;font-size:14px;">Received from ${escapeHtml(data.name || "Website visitor")}${photoCount ? ` with ${photoCount} attached photo${photoCount === 1 ? "" : "s"}` : ""}.</p></td></tr>
       <tr><td style="padding:10px 28px 28px;"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border:1px solid #e8e1d7;border-bottom:0;">${rows}</table></td></tr>
-      <tr><td style="background:#faf7f2;padding:18px 28px;border-top:1px solid #e8e1d7;color:#6b7280;font-size:12px;">Elevia Stays &nbsp;•&nbsp; Built to Inspire.</td></tr>
+      <tr><td style="background:#faf7f2;padding:18px 28px;border-top:1px solid #e8e1d7;color:#6b7280;font-size:12px;">Elevia Stays &nbsp;•&nbsp; Stay Elevated. Live Inspired.</td></tr>
     </table>
   </td></tr></table>${automationPayload ? `<div aria-hidden="true" style="font-size:1px;line-height:1px;color:#ffffff;max-height:1px;overflow:hidden;">Automation Payload: ${escapeHtml(automationPayload)}</div>` : ""}</body></html>`;
 }
