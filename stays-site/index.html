@@ -3,25 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+    try {
+      if (localStorage.getItem('elevia_analytics_consent') === 'granted') {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+      }
+    } catch (e) {}
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RPH8RR7MRP"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-RPH8RR7MRP', {
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+  </script>
   <title>Elevia Stays | Stay Elevated. Live Inspired. | Insurance Relocation & Corporate Housing</title>
   <meta name="description" content="Elevia Stays is developing premium furnished housing for insurance relocation, corporate stays, and individuals in transition. Seeking property partnerships across Atlanta, Orlando, Tampa, Dallas, and Phoenix.">
   <meta name="keywords" content="insurance relocation housing, corporate housing, furnished rentals, temporary housing solutions, extended stay housing, ALE housing, Elevia Stays">
   <meta property="og:title" content="Elevia Stays | Stay Elevated. Live Inspired.">
   <meta property="og:description" content="Premium furnished housing for insurance relocation, corporate stays, and families in transition.">
-  <meta property="og:url" content="https://eleviaenterprises.com/elevia-stays.html">
+  <meta property="og:url" content="https://eleviastays.com/">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://eleviaenterprises.com/og-image.jpg">
+  <meta property="og:image" content="https://eleviastays.com/og-image.jpg">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="1024">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/jpeg" href="favicon.jpg">
-  <link rel="canonical" href="https://eleviaenterprises.com/elevia-stays.html">
+  <link rel="canonical" href="https://eleviastays.com/">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     "name": "Elevia Stays",
-    "url": "https://eleviaenterprises.com/elevia-stays.html",
+    "url": "https://eleviastays.com/",
     "description": "Developing premium furnished housing for insurance relocation, corporate stays, and individuals in transition.",
     "email": "hello@eleviastays.com",
     "parentOrganization": {"@type": "Organization", "name": "Elevia Enterprises", "url": "https://eleviaenterprises.com"},
@@ -182,6 +206,12 @@
     .photo-preview-name { margin-top: 0.35rem; color: rgba(250,247,242,0.6); font-size: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .photo-remove { position: absolute; top: 4px; right: 4px; width: 24px; height: 24px; padding: 0; border: 0; border-radius: 50%; background: rgba(27,43,75,0.9); color: #FAF7F2; cursor: pointer; font-size: 16px; line-height: 24px; }
     .photo-error { display: none; margin-top: 0.75rem; color: #f3aaa4; font-size: 12px; line-height: 1.5; }
+    .analytics-consent { position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 1000; display: none; align-items: center; justify-content: space-between; gap: 1.5rem; max-width: 760px; margin: 0 auto; padding: 1rem 1.25rem; background: var(--navy); color: rgba(250,247,242,0.78); border: 1px solid rgba(201,168,76,0.45); box-shadow: 0 12px 35px rgba(0,0,0,0.22); }
+    .analytics-consent p { font-size: 12px; line-height: 1.6; }
+    .analytics-consent-actions { display: flex; gap: 0.65rem; flex-shrink: 0; }
+    .analytics-consent button { border: 1px solid var(--gold); padding: 0.65rem 0.9rem; font-family: 'Montserrat',sans-serif; font-size: 10px; letter-spacing: 0.11em; text-transform: uppercase; cursor: pointer; }
+    .analytics-consent-accept { background: var(--gold); color: var(--navy); }
+    .analytics-consent-decline { background: transparent; color: #FAF7F2; }
 
 
     /* CONDITIONAL FORM */
@@ -230,6 +260,9 @@
       .benefits-grid { grid-template-columns: 1fr; }
       .form-grid { grid-template-columns: 1fr; }
       .photo-previews { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .analytics-consent { align-items: stretch; flex-direction: column; gap: 0.8rem; }
+      .analytics-consent-actions { width: 100%; }
+      .analytics-consent button { flex: 1; }
       footer { padding: 2rem 1.5rem; gap: 1.5rem; }
       .footer-bottom { grid-template-columns: 1fr; gap: 1rem; text-align: center; }
       .footer-copy { text-align: center; }
@@ -396,6 +429,13 @@
         <input type="hidden" name="priority"           value="Normal">
         <input type="hidden" name="submitted_at"       value="">
         <input type="hidden" name="automation_payload" value="">
+        <input type="hidden" name="landing_path"       value="">
+        <input type="hidden" name="referrer"           value="">
+        <input type="hidden" name="utm_source"         value="">
+        <input type="hidden" name="utm_medium"         value="">
+        <input type="hidden" name="utm_campaign"       value="">
+        <input type="hidden" name="utm_term"           value="">
+        <input type="hidden" name="utm_content"        value="">
         <!-- Canonical single-valued fields populated by JS before submit -->
         <input type="hidden" id="hf_company"  name="company"  value="">
         <input type="hidden" id="hf_message"  name="message"  value="">
@@ -779,6 +819,22 @@
         <!-- ═══════════════════════════════════════════════════════ -->
         <div id="form-footer-fields" style="display:none;" aria-hidden="true">
           <div class="form-grid" style="margin-top:1.5rem;">
+            <div class="form-field form-full">
+              <label for="discovery_source">How did you find Elevia Stays? (optional)</label>
+              <select id="discovery_source" name="discovery_source">
+                <option value="" selected>Select one&hellip;</option>
+                <option value="Search engine">Google or another search engine</option>
+                <option value="AI assistant">ChatGPT or another AI assistant</option>
+                <option value="Referral">Friend or professional referral</option>
+                <option value="Social media">Social media</option>
+                <option value="Property community">Property-owner group or forum</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-field form-full" id="discovery-query-field" style="display:none;">
+              <label for="discovery_query">What did you search or ask? (optional)</label>
+              <input type="text" id="discovery_query" name="discovery_query" placeholder="A short answer is perfect">
+            </div>
             <div class="form-field form-full form-consent">
               <label class="consent-label" for="consent">
                 <input type="checkbox" name="consent" id="consent" required>
@@ -829,6 +885,14 @@
     </div>
   </footer>
 
+  <aside id="analytics-consent" class="analytics-consent" role="dialog" aria-label="Analytics preferences" aria-live="polite">
+    <p>We use privacy-conscious analytics to understand how people find Elevia Stays and improve the website.</p>
+    <div class="analytics-consent-actions">
+      <button type="button" class="analytics-consent-decline" id="analytics-decline">Decline</button>
+      <button type="button" class="analytics-consent-accept" id="analytics-accept">Allow analytics</button>
+    </div>
+  </aside>
+
   <script>
     // ── NAV ──
     function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
@@ -836,6 +900,70 @@
     // ── DYNAMIC COPYRIGHT YEAR ──
     var yearEl = document.getElementById('copy-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // ── ANALYTICS CONSENT ──
+    (function initAnalyticsConsent() {
+      var banner = document.getElementById('analytics-consent');
+      var accept = document.getElementById('analytics-accept');
+      var decline = document.getElementById('analytics-decline');
+      var stored = '';
+      try { stored = localStorage.getItem('elevia_analytics_consent') || ''; } catch (e) {}
+
+      function choose(value) {
+        try { localStorage.setItem('elevia_analytics_consent', value); } catch (e) {}
+        if (typeof gtag === 'function') {
+          gtag('consent', 'update', { analytics_storage: value });
+        }
+        if (banner) banner.style.display = 'none';
+      }
+
+      if (!stored && banner) banner.style.display = 'flex';
+      if (accept) accept.addEventListener('click', function() { choose('granted'); });
+      if (decline) decline.addEventListener('click', function() { choose('denied'); });
+    })();
+
+    // ── FIRST-TOUCH ATTRIBUTION ──
+    (function initAttribution() {
+      var params = new URLSearchParams(window.location.search);
+      var touch = null;
+      try { touch = JSON.parse(sessionStorage.getItem('elevia_first_touch') || 'null'); } catch (e) {}
+
+      if (!touch) {
+        var referrer = '';
+        try {
+          if (document.referrer) {
+            var referrerUrl = new URL(document.referrer);
+            referrer = referrerUrl.origin + referrerUrl.pathname;
+          }
+        } catch (e) {}
+        touch = {
+          landing_path: window.location.pathname,
+          referrer: referrer,
+          utm_source: params.get('utm_source') || '',
+          utm_medium: params.get('utm_medium') || '',
+          utm_campaign: params.get('utm_campaign') || '',
+          utm_term: params.get('utm_term') || '',
+          utm_content: params.get('utm_content') || ''
+        };
+        try { sessionStorage.setItem('elevia_first_touch', JSON.stringify(touch)); } catch (e) {}
+      }
+
+      Object.keys(touch).forEach(function(name) {
+        var input = document.querySelector('[name="' + name + '"]');
+        if (input) input.value = touch[name] || '';
+      });
+    })();
+
+    var discoverySource = document.getElementById('discovery_source');
+    var discoveryQueryField = document.getElementById('discovery-query-field');
+    var discoveryQuery = document.getElementById('discovery_query');
+    if (discoverySource) {
+      discoverySource.addEventListener('change', function() {
+        var showQuery = this.value === 'Search engine' || this.value === 'AI assistant';
+        discoveryQueryField.style.display = showQuery ? 'flex' : 'none';
+        if (!showQuery && discoveryQuery) discoveryQuery.value = '';
+      });
+    }
 
     // ── PATH CONFIGURATION ──
     var PATHS = {
@@ -1072,6 +1200,17 @@
         status:           'New',
         priority:         'Normal',
         submitted_at:     ts,
+        attribution: {
+          discovery_source: fd.get('discovery_source') || '',
+          discovery_query:  fd.get('discovery_query')  || '',
+          landing_path:     fd.get('landing_path')     || '',
+          referrer:         fd.get('referrer')         || '',
+          utm_source:       fd.get('utm_source')       || '',
+          utm_medium:       fd.get('utm_medium')       || '',
+          utm_campaign:     fd.get('utm_campaign')     || '',
+          utm_term:         fd.get('utm_term')         || '',
+          utm_content:      fd.get('utm_content')      || ''
+        },
         details:          {}
       };
 
@@ -1195,6 +1334,13 @@
       })
       .then(function(res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
+        if (typeof gtag === 'function') {
+          gtag('event', 'generate_lead', {
+            form_id: 'inquiry',
+            inquiry_type: type,
+            discovery_source: fd2.get('discovery_source') || 'not_provided'
+          });
+        }
         form.style.display     = 'none';
         successEl.style.display = 'block';
         successEl.focus();
