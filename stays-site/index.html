@@ -218,6 +218,8 @@
     .form-path-heading { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin: 2rem 0 1rem; padding-top: 1.5rem; border-top: 1px solid rgba(201,168,76,0.15); }
     .form-consent { margin-top: 0.5rem; }
     .consent-label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: rgba(250,247,242,0.55); font-size: 13px; font-weight: 300; line-height: 1.6; }
+    .form-field label.consent-label { font-size: 14px; line-height: 1.65; letter-spacing: normal; text-transform: none; color: #e2e6ed; }
+    .form-consent .form-disclaimer { color: #cbd3df; font-style: normal; }
     .consent-label input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; cursor: pointer; border: 1px solid rgba(201,168,76,0.5); background: transparent; position: relative; display: grid; place-content: center; }
     .consent-label input[type="checkbox"]:checked::before { content: '\00D7'; font-size: 15px; font-weight: 700; color: var(--gold); line-height: 1; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
     .consent-label input[type="checkbox"]:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
@@ -428,6 +430,10 @@
         <input type="hidden" name="status"             value="New">
         <input type="hidden" name="priority"           value="Normal">
         <input type="hidden" name="submitted_at"       value="">
+        <input type="hidden" name="sms_consent_status" value="not_opted_in">
+        <input type="hidden" name="sms_consent_version" value="2026-10-04">
+        <input type="hidden" name="sms_consent_source" value="https://eleviastays.com/#inquiry">
+        <input type="hidden" name="sms_consent_at" value="">
         <input type="hidden" name="automation_payload" value="">
         <input type="hidden" name="landing_path"       value="">
         <input type="hidden" name="referrer"           value="">
@@ -838,8 +844,15 @@
             <div class="form-field form-full form-consent">
               <label class="consent-label" for="consent">
                 <input type="checkbox" name="consent" id="consent" required>
-                <span>I consent to being contacted by Elevia Stays regarding this inquiry. *</span>
+                <span>I agree to be contacted by email or phone by Elevia Stays regarding this inquiry. This does not include text messages. *</span>
               </label>
+            </div>
+            <div class="form-field form-full form-consent">
+              <label class="consent-label" for="sms_consent">
+                <input type="checkbox" name="sms_consent" id="sms_consent" value="yes">
+                <span>Optional: I agree to receive text messages from Elevia Enterprises LLC (Elevia Stays), including its Nexus assistant, about my inquiry, appointments, and requested service updates. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent is not a condition of purchase.</span>
+              </label>
+              <p class="form-disclaimer">Read our <a href="/sms-privacy" style="color:var(--gold);text-decoration:underline;">SMS Privacy Policy</a> and <a href="/sms-terms" style="color:var(--gold);text-decoration:underline;">SMS Terms</a>. SMS consent is not shared with other businesses or affiliates for their marketing.</p>
             </div>
           </div>
           <p class="form-disclaimer">Submitting an inquiry does not guarantee property acceptance, housing availability, occupancy, placement, rental income, or a particular partnership structure.</p>
@@ -1196,6 +1209,11 @@
         availability_date:fd.get('availability_date')|| '',
         message:          fd.get('message')          || '',
         consent:          fd.get('consent') === 'on',
+        sms_consent:      fd.get('sms_consent') === 'yes',
+        sms_consent_status: fd.get('sms_consent_status'),
+        sms_consent_version: fd.get('sms_consent_version'),
+        sms_consent_source: fd.get('sms_consent_source'),
+        sms_consent_at:   fd.get('sms_consent_at') || null,
         source:           'Website',
         status:           'New',
         priority:         'Normal',
@@ -1310,6 +1328,9 @@
 
       // Set timestamp
       form.querySelector('[name="submitted_at"]').value = ts;
+      var smsOptedIn = document.getElementById('sms_consent').checked;
+      form.querySelector('[name="sms_consent_status"]').value = smsOptedIn ? 'opted_in' : 'not_opted_in';
+      form.querySelector('[name="sms_consent_at"]').value = smsOptedIn ? ts : '';
 
       // Build FormData after setting canonical fields
       var fd = new FormData(form);
